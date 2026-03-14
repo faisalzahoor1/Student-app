@@ -111,6 +111,38 @@ const getData = async (req, res) => {
         console.log(`This is the error in Student Get Data Controller ${error}`)
     }
 }
+const updateStudent = async (req, res) => {
+    try {
 
+        const { name, contact, cgpa, address, email } = req.body
 
-export { StudentLogin, AddStudent, getData };
+        const student = await studentModel.findOne({ email })
+
+        if (!student) {
+            return res.json({ success: false, message: "Student not found" })
+        }
+
+        const updatedStudent = await studentModel.findOneAndUpdate(
+            { email },
+            {
+                name,
+                contact,
+                cgpa,
+                address: JSON.parse(address)
+            },
+            { new: true }
+        )
+
+        res.json({
+            success: true,
+            message: "Student Updated Successfully",
+            studentData: updatedStudent
+        })
+
+    } catch (error) {
+        console.log(`Error in Update Student ${error}`)
+        res.json({ success: false, message: "Update failed" })
+    }
+}
+
+export { StudentLogin, AddStudent, getData, updateStudent };
