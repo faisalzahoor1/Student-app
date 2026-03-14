@@ -23,6 +23,6 @@ app.use(cors())
 app.use('/api/student', StudentRouter)
 
 
-app.listen(PORT, () => {
+app.listen(PORT,  "0.0.0.0", () => {
     console.log(`Server is Running on ${PORT}`)
 })
