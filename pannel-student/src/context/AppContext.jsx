@@ -24,7 +24,7 @@ const AppContextProvider = (props) => {
     //     return () => window.removeEventListener("storage", handleStorageChange);
     //   }, []);
 
-    const backend_url = import.meta.env.VITE_BACKEND_URL
+    const backend_url = import.meta.env.VITE_BACKEND_URL || "/api"
     const [email, setEmail] = useState(localStorage.getItem('email') ? localStorage.getItem('email') : '');
     const navigate = useNavigate();
 
