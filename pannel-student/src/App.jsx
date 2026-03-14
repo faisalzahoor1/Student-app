@@ -8,6 +8,7 @@ import { Login } from './pages/Login'
 import { useContext } from 'react'
 import { AppContext } from './context/AppContext'
 import { Show } from './components/Show.jsx'
+import { Edit } from './pages/Edit.jsx'
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/details' element={<Details />} />
         <Route path='/info' element={<StudentInfo />} />
         <Route path='/show' element={<Show />} />
+        <Route path='/edit' element={<Edit />} />
       </Routes>
     </div>
   ) : (
