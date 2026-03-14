@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Navbar } from './components/Navbar'
 import { Details } from './pages/Details'
@@ -8,28 +8,27 @@ import { Login } from './pages/Login'
 import { useContext } from 'react'
 import { AppContext } from './context/AppContext'
 import { Show } from './components/Show.jsx'
-import { Edit } from './pages/Edit.jsx'
 
 const App = () => {
 
   const { token } = useContext(AppContext)
   return token ? (
-    <div>
+  <div>
       <ToastContainer />
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/details' element={<Details />} />
-        <Route path='/info' element={<StudentInfo />} />
-        <Route path='/show' element={<Show />} />
-        <Route path='/edit' element={<Edit />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="/info" element={<StudentInfo />} />
+        <Route path="/show" element={<Show />} />
       </Routes>
     </div>
   ) : (
     <>
       <ToastContainer />
       <Routes>
-        <Route path='/login' element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </>
   )

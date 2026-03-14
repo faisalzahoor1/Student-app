@@ -4,18 +4,16 @@ import cors from 'cors'
 import StudentRouter from './routes/StudentRoutes.js';
 import connectCloudinary from './config/cloudinary.js';
 import connectDB from './config/mongodb.js';
-import path from 'path';
 
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
-// ES Module __filename and __dirname
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-
 dotenv.config()
 const app = express();
+
 connectCloudinary()
 connectDB()
 
@@ -23,17 +21,18 @@ const PORT = process.env.PORT || 4000
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors({ origin: '*' }));
 
-const frontendPath = path.join(__dirname, "pannel-student/dist");
-app.use(express.static(frontendPath));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-});
-
+// API ROUTES FIRST
 app.use('/api/student', StudentRouter)
 
+// Serve React build
+app.use(express.static(path.join(__dirname, "../pannel-student/dist")));
+
+// React catch-all (must be LAST)
+app.get( (req, res) => {
+  res.sendFile(path.join(__dirname, "../pannel-student/dist/index.html"));
+});
 
 app.listen(PORT, () => {
     console.log(`Server is Running on ${PORT}`)

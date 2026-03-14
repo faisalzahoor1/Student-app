@@ -25,10 +25,6 @@ export const Navbar = () => {
                     <li className='py-1 font-medium'>Show Info</li>
                     <hr className='border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden'/>
                 </NavLink>
-                <NavLink to='/edit'>
-                    <li className='py-1 font-medium'>Edit Info</li>
-                    <hr className='border-none outline-none h-0.5 bg-blue-500 w-3/5 m-auto hidden'/>
-                </NavLink>
             </ul>
             <div>
                 <button onClick={logout} className='border px-4 py-2 font-medium rounded bg-blue-400 text-white cursor-pointer'>Logout</button>
